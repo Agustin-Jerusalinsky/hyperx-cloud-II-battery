@@ -33,9 +33,22 @@ reboot the system to reload udev rules.
 
 ## Usage
 
+Show battery level in the command line
 ```bash
 python3 battery.py
 ```
+
+### Panel AppIndicator
+```bash
+python3 pannel.py
+```
+
+### Autostart
+```bash
+./autostart.sh
+```
+Add to `~/.config/autostart/` a desktop entry to execute pannel.py when login.
+(Ubuntu 20.04 lts)
 
 
 ## References

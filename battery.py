@@ -1,14 +1,14 @@
 import hid
 
 
-def get_battery_level():
+def get_battery_level(h=None):
 
     vid = 0x0951  # Hyperx vendor ID
 
     pid = 0x1718  # Hyperx Cloud II product ID
-
-    h = hid.device()
-    h.open(vid, pid)  # TREZOR VendorID/ProductID
+    if not h:
+        h = hid.device()
+        h.open(vid, pid)  # TREZOR VendorID/ProductID
 
     report = h.get_input_report(6,62) #ask for report so it doesnt return broken pipe error
 
@@ -25,9 +25,9 @@ def get_battery_level():
     read = h.read(255)
 
     #battery is the 7th byte
-    return read[7]
+    return h,read[7]
 
 
 if __name__ == "__main__":
-    print(get_battery_level())
+    print(get_battery_level()[1])
 
