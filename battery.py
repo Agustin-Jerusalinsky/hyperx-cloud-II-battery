@@ -23,9 +23,12 @@ def get_battery_level(h=None):
 
     # read the response
     read = h.read(255)
-
-    #battery is the 7th byte
-    return h,read[7]
+    h.write(report)
+    if read[0:4] == [11, 0 , 187, 2]:
+        #battery is the 7th byte
+        return h,read[7]
+    else:
+        return h, 0
 
 
 if __name__ == "__main__":
